@@ -16,11 +16,8 @@
 
 package net.simonvt.timepicker;
 
-import net.simonvt.numberpicker.NumberPicker;
-
 import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -36,6 +33,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import net.simonvt.numberpicker.NumberPicker;
 
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
@@ -467,26 +465,29 @@ public class TimePicker extends FrameLayout {
 
     @Override
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
-        onPopulateAccessibilityEvent(event);
+		populateAccessibilityEvent(event);
         return true;
     }
 
     @Override
     public void onPopulateAccessibilityEvent(AccessibilityEvent event) {
         super.onPopulateAccessibilityEvent(event);
-
-        int flags = DateUtils.FORMAT_SHOW_TIME;
-        if (mIs24HourView) {
-            flags |= DateUtils.FORMAT_24HOUR;
-        } else {
-            flags |= DateUtils.FORMAT_12HOUR;
-        }
-        mTempCalendar.set(Calendar.HOUR_OF_DAY, getCurrentHour());
-        mTempCalendar.set(Calendar.MINUTE, getCurrentMinute());
-        String selectedDateUtterance = DateUtils.formatDateTime(getContext(),
-                mTempCalendar.getTimeInMillis(), flags);
-        event.getText().add(selectedDateUtterance);
+		populateAccessibilityEvent(event);
     }
+
+	private void populateAccessibilityEvent(AccessibilityEvent event) {
+		int flags = DateUtils.FORMAT_SHOW_TIME;
+		if (mIs24HourView) {
+			flags |= DateUtils.FORMAT_24HOUR;
+		} else {
+			flags |= DateUtils.FORMAT_12HOUR;
+		}
+		mTempCalendar.set(Calendar.HOUR_OF_DAY, getCurrentHour());
+		mTempCalendar.set(Calendar.MINUTE, getCurrentMinute());
+		String selectedDateUtterance = DateUtils.formatDateTime(getContext(),
+				mTempCalendar.getTimeInMillis(), flags);
+		event.getText().add(selectedDateUtterance);
+	}
 
     @Override
     public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
