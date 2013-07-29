@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="net.simonvt.timepicker" android:versionCode="1" android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="17" />
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="18" />
 
     <application /> <!-- Gradle bug, which requires this to properly merge the manifest. Can be removed once fixed. -->
 </manifest>
