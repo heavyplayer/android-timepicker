@@ -1,7 +1,7 @@
 apply plugin: 'android-library'
 
 dependencies {
-    compile project(':Todoist:libraries:android-numberpicker:numberpicker')
+    compile project(':libs:projects:android-numberpicker:numberpicker')
 }
 
 android {
